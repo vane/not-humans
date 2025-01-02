@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 import argparse
 
@@ -10,9 +11,8 @@ def run_reject(address, existing=None, prefix='reject', plan=True, zone='FedoraW
     if rule in existing:
         return False
     cmd = f"""sudo firewall-cmd --zone={zone} --add-rich-rule='{rule}'"""
-    if plan:
-        print(rule)
-    else:
+    print(rule)
+    if not plan:
         os.system(cmd)
     return True
 
@@ -47,7 +47,6 @@ def read(fpath):
     return out
 
 
-# -*- coding: utf-8 -*-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--plan', '-p', type=bool, default=True, action=argparse.BooleanOptionalAction)
