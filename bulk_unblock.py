@@ -4,7 +4,7 @@ import os
 import argparse
 
 def remove(plan = True, zone='FedoraWorkstation'):
-    rules = os.popen('firewall-cmd --list-all --zone=FedoraWorkstation').read()
+    rules = os.popen(f'firewall-cmd --list-all --zone={zone}').read()
     started = False
     for r in rules.split('\n'):
         if not r or not started:
@@ -20,5 +20,6 @@ def remove(plan = True, zone='FedoraWorkstation'):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--plan', '-p', type=bool, default=True, action=argparse.BooleanOptionalAction)
+    parser.add_argument('--zone', '-z', type=str, default="FedoraWorkstation")
     args = parser.parse_args()
-    remove(args.plan)
+    remove(args.plan, args.zone)
