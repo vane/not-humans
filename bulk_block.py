@@ -51,8 +51,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--plan', '-p', type=bool, default=True, action=argparse.BooleanOptionalAction)
     parser.add_argument('--zone', '-z', type=str, default="FedoraWorkstation")
+    parser.add_argument('--file', '-f', type=str, default="firewall/README.md")
     args = parser.parse_args()
-    address_to_block = read('firewall/README.md')
+    address_to_block = read(args.file)
     address_blocked = read_firewall_cmd_rules()
     stats = {'skipped': 0, 'executed': 0}
     for address, prefix in address_to_block:
